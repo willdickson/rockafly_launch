@@ -1,0 +1,5 @@
+<launch>
+    <include file="$(find Kinefly)/launch/main.launch"/>
+    <include file="$(env RIG)/image_stabilizer.launch"/>
+    <include file="$(find autostep_ros)/launch/autostep.launch"/>
+</launch>
