@@ -12,24 +12,47 @@ from autostep_ros.msg import TrackingData
 autostep = AutostepProxy()
 
 # -----------------------------------------------------------------------------
-if True:
+if False:
+
+    jog_params = {'speed': 200, 'accel': 500, 'decel': 500}
+    max_params = {'speed': 1000, 'accel': 2000, 'decel': 2000}
+    
+    autostep = AutostepProxy()
+    
     print()
     print('* testing run command')
+    
+    autostep.set_jog_mode_params(jog_params)
+    print('  jog params = {}'.format(autostep.get_jog_mode_params()))
+    
+    autostep.set_max_mode_params(max_params)
+    print('  max params = {}'.format(autostep.get_max_mode_params()))
+    
+    print()
+    print('  move to 0.0')
     autostep.set_move_mode('jog')
     autostep.move_to(0.0)
     autostep.busy_wait()
+    
+    print('  sleeping ')
+    time.sleep(2.0)
     autostep.set_move_mode('max')
-
+    print()
+    
+    
     for i in range(5):
+    
         for vel in [600, -600]:
             print('  vel: {}'.format(vel))
             autostep.run(vel)
             time.sleep(2.0)
-            #autostep.run(0)
-            #time.sleep(2.0)
+            autostep.soft_stop()
+            autostep.busy_wait()
+    
     autostep.set_move_mode('jog')
     autostep.run(0.0)
     print()
+
 
 # -----------------------------------------------------------------------------
 if False:
