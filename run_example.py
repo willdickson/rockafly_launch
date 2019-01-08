@@ -1,13 +1,8 @@
 #!/usr/bin/env python
 from __future__ import print_function
-import sys
 import time
-import scipy
-import rospy
 
-import std_msgs.msg
 from autostep_proxy import AutostepProxy
-from autostep_ros.msg import TrackingData
 
 num_cycle = 5
 velocity = 600

@@ -3,12 +3,10 @@ from __future__ import print_function
 import sys
 import time
 import scipy
-import rospy
 import matplotlib.pyplot as plt
 
-import std_msgs.msg
 from autostep_proxy import AutostepProxy
-from autostep_ros.msg import TrackingData
+
 
 autostep = AutostepProxy()
 
@@ -34,8 +32,8 @@ plt.ylabel('position (deg)')
 plt.title('Trajectory')
 plt.show()
 
-
 print('  move to start position')
+autostep.set_move_mode('jog')
 autostep.move_to(position[0])
 autostep.busy_wait()
 time.sleep(1.0)

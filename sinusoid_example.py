@@ -1,13 +1,7 @@
 #!/usr/bin/env python
 from __future__ import print_function
-import sys
 import time
-import scipy
-import rospy
-
-import std_msgs.msg
 from autostep_proxy import AutostepProxy
-from autostep_ros.msg import TrackingData
 
 print()
 print('* sinusoid example')
@@ -36,11 +30,13 @@ for amplitude in amplitude_list:
             'num_cycle': 4 
             }
     print('  move to sinusoid start')
+    autostep.set_move_mode('jog')
     autostep.move_to_sinusoid_start(param)
     autostep.busy_wait()
     time.sleep(1.0)
 
     print('  running sinusoid')
+    autostep.set_move_mode('max')
     autostep.sinusoid(param)
     autostep.busy_wait()
     time.sleep(1.0)
